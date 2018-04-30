@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\User;
 
@@ -48,6 +47,26 @@ class UserController extends Controller
         $user = User::first();
         $token = JWTAuth::fromUser($user);
 
-        return Response::json(compact('token'));
+        return response()->json(compact('token'));
+    }
+
+    public function changeName(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $user = auth()->user();
+        $user->name = $request->get('name');
+        $user->save();
+
+        return response()->json([
+            'message' =>
+                "User name was successfully changed to {$request->get('name')}",
+        ]);
     }
 }
