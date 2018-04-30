@@ -25,5 +25,6 @@ Route::prefix('user')->group(function () {
     Route::post('register', 'UserController@register');
     Route::post('change-name', 'UserController@changeName');
     Route::post('change-email', 'UserController@changeEmail');
+    Route::post('change-password', 'UserController@changePassword');
 
 });

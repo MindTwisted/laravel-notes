@@ -122,4 +122,37 @@ class UserController extends Controller
                 "User email was successfully changed to {$request->get('email')}",
         ]);
     }
+
+    /**
+     * Change user password
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function changePassword(Request $request)
+    {
+        $user = auth()->user();
+        $validator = Validator::make($request->all(), [
+            'new_password' => 'required',
+            'password'     => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        if (!$this->checkPassword($request->get('password'))) {
+            return response()->json(['error' => 'Please enter valid password'],
+                401);
+        }
+
+        $user->password = bcrypt($request->get('new_password'));
+        $user->save();
+
+        return response()->json([
+            'message' =>
+                "User password was successfully changed",
+        ]);
+    }
 }
