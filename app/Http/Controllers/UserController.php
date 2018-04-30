@@ -51,13 +51,12 @@ class UserController extends Controller
             return response()->json($validator->errors());
         }
 
-        User::create([
-            'name'     => $request->get('name'),
-            'email'    => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
-        ]);
+        $user = new User();
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
+        $user->save();
 
-        $user = User::first();
         $token = JWTAuth::fromUser($user);
 
         return response()->json(compact('token'));
