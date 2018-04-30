@@ -155,4 +155,39 @@ class UserController extends Controller
                 "User password was successfully changed",
         ]);
     }
+
+    /**
+     * Delete user
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email'    => 'required|string|email',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $user = auth()->user();
+        $credentials = request(['email', 'password']);
+
+        if (!auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Please enter valid credentials'],
+                401);
+        }
+
+        auth()->logout();
+        $user->delete();
+
+        return response()->json([
+            'message' =>
+                "Your account was successfully deleted",
+        ]);
+    }
 }

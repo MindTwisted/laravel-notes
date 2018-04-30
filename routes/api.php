@@ -26,5 +26,6 @@ Route::prefix('user')->group(function () {
     Route::put('change-name', 'UserController@changeName');
     Route::put('change-email', 'UserController@changeEmail');
     Route::put('change-password', 'UserController@changePassword');
+    Route::delete('delete-user', 'UserController@deleteUser');
 
 });
