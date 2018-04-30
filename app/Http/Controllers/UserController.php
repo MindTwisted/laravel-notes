@@ -21,7 +21,7 @@ class UserController extends Controller
     }
 
     /**
-     * Check if password is right
+     * Check if password is valid.
      *
      * @param string $password
      *
@@ -33,7 +33,7 @@ class UserController extends Controller
     }
 
     /**
-     * Register user via API
+     * Register user via API.
      *
      * @param Request $request
      *
@@ -64,7 +64,7 @@ class UserController extends Controller
     }
 
     /**
-     * Change user name
+     * Change user name.
      *
      * @param Request $request
      *
@@ -91,7 +91,7 @@ class UserController extends Controller
     }
 
     /**
-     * Change user email
+     * Change user email.
      *
      * @param Request $request
      *
@@ -124,7 +124,7 @@ class UserController extends Controller
     }
 
     /**
-     * Change user password
+     * Change user password.
      *
      * @param Request $request
      *
@@ -157,7 +157,7 @@ class UserController extends Controller
     }
 
     /**
-     * Delete user
+     * Delete user.
      *
      * @param Request $request
      *
