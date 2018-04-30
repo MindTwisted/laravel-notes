@@ -73,7 +73,21 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => "required|max:255|unique:notes,title,{$id}",
+            'body'  => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $note = Note::find($id);
+        $note->title = $request->get('title');
+        $note->body = $request->get('body');
+        $note->save();
+
+        return response()->json(compact('note'));
     }
 
     /**
