@@ -57,7 +57,10 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = auth()->user();
+        $note = $user->notes()->find($id);
+
+        return response()->json(compact('note'));
     }
 
     /**
