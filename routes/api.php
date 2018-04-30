@@ -29,3 +29,12 @@ Route::prefix('user')->group(function () {
     Route::delete('delete-user', 'UserController@deleteUser');
 
 });
+
+Route::middleware('auth:api')->group(function () {
+
+    Route::resource('notes', 'NoteController')->except([
+        'create',
+        'edit',
+    ]);
+
+});
