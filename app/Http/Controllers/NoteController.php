@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Note;
 
 class NoteController extends Controller
 {

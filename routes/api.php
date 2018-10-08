@@ -38,3 +38,8 @@ Route::middleware('auth:api')->group(function () {
     ]);
 
 });
+
+//TODO: add tests
+//TODO: write notes and user seeder
+//TODO: write readme
+//TODO: write API documentation on welcome page
